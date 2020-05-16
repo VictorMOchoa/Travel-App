@@ -23,7 +23,6 @@ app.get('/trip', (req, res) => {
     .then(response => getDarkSkyWeatherData(response))
     .then(a => res.send(a))
     .catch(error => {
-      console.log('an erorr at trip level')
       console.error(error);
     });
     //   .then(locationInfo => getDarkSkyWeatherData(locationInfo))
@@ -40,8 +39,8 @@ function getGeoNamesLocationData(city) {
 let getDarkSkyWeatherData = (locationInfo) => {
   console.log("in dark sky data")
   console.log(locationInfo);
-  const darkSkyURL = `https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/37.8267,-122.4233`
-  //DARK_SKY_API_KEY
+  const darkSkyURL = `https://api.darksky.net/forecast/${process.env.DARK_SKY_API_KEY}/${locationInfo.lat},${locationInfo.lng}`;
+  console.log(darkSkyURL)
   // return axios.get(baseURL + auth)
   //   .then(response => response.data.postalCodes[0]);
 }
