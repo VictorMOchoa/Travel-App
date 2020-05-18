@@ -7,26 +7,22 @@
    </head>
    <body>
       <div id = "app">
-         <div class ="holder headline">
-            Travel App
-         </div>
-         <div class ="holder zip">
-            <label for="zip">Enter the city you would like to travel to</label>
-            <input type="text" id="city-name" placeholder="City name">
-         </div>
-         <div class ="holder feel">
-            <label for="feelings">How are you feeling today?</label>
-            <textarea class= "myInput" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50"></textarea>
+        <div class ="holder headline">
+           Travel App
+        </div>
+        <div class ="holder zip">
+           <label for="zip">Enter the city you would like to travel to</label>
+           <input type="text" id="city-name" placeholder="City name">
+        </div>
+        <div class ="holder departure">
+           <label for="departure">Enter the date when you would like to leave</label>
+           <input type="text" id="depart-date" placeholder="mm/dd/yyyy">
+        </div>
+        <div class ="holder arrival">
+           <label for="arrival">Enter the date when you would like to return</label>
+           <input type="text" id="return-date" placeholder="mm/dd/yyyy">
+        </div>
             <button id="generate" type = "submit" onclick="Client.handleSubmit(event)"> Submit </button>
-         </div>
-         <div class ="holder entry">
-            <div class = "title">Most Recent Entry</div>
-            <div id = "entryHolder">
-               <div id = "date"></div>
-               <div id = "temp"></div>
-               <div id = "content"></div>
-            </div>
-         </div>
       </div>
       <script>
          // Check that service workers are supported
