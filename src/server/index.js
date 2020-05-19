@@ -22,7 +22,9 @@ app.get('/trip', (req, res) => {
     getGeoNamesLocationData(city)
       .then(response => getForecast(response, getCurrentForecast, departureDate, dayAfter))
       .then(weatherData => getPhoto(city, weatherData))
-      .then(a => res.send(a))
+      .then(returnObj => {
+        res.send(returnObj)
+      })
       .catch(error => {
         console.error(error);
       });
@@ -50,25 +52,51 @@ let getForecast = (locationInfo, getCurrentForecast, departureDate, dayAfter) =>
     .then(response => response.data);
 }
 
-let getPhoto = (city, weatherData) => {
-  console.log(weatherData);
+ let getPhoto = (city, weatherData) => {
   const baseURL = `https://pixabay.com/api/?`;
   const params = `key=${process.env.PIXABAY_API_KEY}&q=${city}&image_type=photo&safesearch=true`;
 
   return axios.get(baseURL + params)
-    .then(response => {
+    .then(response =>
+      {
+      let imageURL = null;
       let numOfHits = response.data.hits.length;
-      let imageURL = '';
-      // If no results, make another call for the country
-      if (numOfHits == 0) {
-        let retryURL = baseURL + `key=${process.env.PIXABAY_API_KEY}&q=${weatherData.country_code} country&image_type=photo&safesearch=true`;
-        axios.get(retryURL)
-          .then( response => {console.log(response.data)});
-      } else {
-
+      if (numOfHits != 0) {
+        imageURL = response.data.hits[0].webformatURL;
       }
-      // Create the object to return back to the client for the UI
-      let obj = {};
+      return constructObjectForUI(imageURL, weatherData);
+    }
+  );
+}
+
+let constructObjectForUI = (imageURL, weatherData) => {
+  let obj = {
+    "image": imageURL,
+    "country_code": weatherData.country_code,
+    "temperature": ((weatherData.data[0].temp * (9/5)) + 32).toFixed(1)
+  };
+  return obj;
+}
+
+app.get('/altPhoto', (req, res) => {
+    let country = req.query.countryCode;
+    getCountryPhoto(country)
+      .then(response => {
+        res.send(response);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+});
+
+let getCountryPhoto = (country) => {
+  const baseURL = `https://pixabay.com/api/?`;
+  let retryURL = baseURL + `key=${process.env.PIXABAY_API_KEY}&q=${country} country&image_type=photo&safesearch=true`;
+  return axios.get(retryURL)
+    .then(response => {
+      let obj = {
+        "image": response.data.hits[0].webformatURL
+      };
       return obj;
     });
 }
