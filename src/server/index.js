@@ -21,6 +21,7 @@ app.get('/trip', (req, res) => {
     let dayAfter = req.query.dayAfter;
     getGeoNamesLocationData(city)
       .then(response => getForecast(response, getCurrentForecast, departureDate, dayAfter))
+      .then(weatherData => getPhoto(city, weatherData))
       .then(a => res.send(a))
       .catch(error => {
         console.error(error);
@@ -46,8 +47,28 @@ let getForecast = (locationInfo, getCurrentForecast, departureDate, dayAfter) =>
   }
 
   return axios.get(baseURL + params)
+    .then(response => response.data);
+}
+
+let getPhoto = (city, weatherData) => {
+  console.log(weatherData);
+  const baseURL = `https://pixabay.com/api/?`;
+  const params = `key=${process.env.PIXABAY_API_KEY}&q=${city}&image_type=photo&safesearch=true`;
+
+  return axios.get(baseURL + params)
     .then(response => {
-      console.log(response.data)
-            console.log(response.data.data[0])
+      let numOfHits = response.data.hits.length;
+      let imageURL = '';
+      // If no results, make another call for the country
+      if (numOfHits == 0) {
+        let retryURL = baseURL + `key=${process.env.PIXABAY_API_KEY}&q=${weatherData.country_code} country&image_type=photo&safesearch=true`;
+        axios.get(retryURL)
+          .then( response => {console.log(response.data)});
+      } else {
+
+      }
+      // Create the object to return back to the client for the UI
+      let obj = {};
+      return obj;
     });
 }
