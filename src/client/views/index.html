@@ -2,27 +2,36 @@
 <html>
    <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Weather Journal</title>
       <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
    </head>
    <body>
+     <div id="headline">
+        <h2>Travel App</h2>
+     </div>
       <div id = "app">
-        <div class ="holder headline">
-           Travel App
-        </div>
-        <div class ="holder zip">
+        <img id="airport-img" src="https://www.smartertravel.com/uploads/2018/11/christmas-airport-baggage-claim-870x500.jpg"></img>
+        <div class="input-div">
            <label for="zip">Enter the city you would like to travel to</label>
            <input type="text" id="city-name" placeholder="City name">
         </div>
-        <div class ="holder departure">
-           <label for="departure">Enter the date when you would like to leave</label>
+        <div class="input-div">
+           <label for="departure">Enter your departure date</label>
            <input type="text" id="depart-date" placeholder="mm/dd/yyyy">
         </div>
-        <div class ="holder arrival">
-           <label for="arrival">Enter the date when you would like to return</label>
+        <div class="input-div">
+           <label for="arrival">Enter your return date</label>
            <input type="text" id="return-date" placeholder="mm/dd/yyyy">
         </div>
-            <button id="generate" type = "submit" onclick="Client.handleSubmit(event)"> Submit </button>
+        <button id="submit-btn" type = "submit" onclick="Client.handleSubmit(event)"> SUBMIT </button>
+      </div>
+      <div id="results-div">
+        <img id="destination-image" src=""></img>
+        <h3 id="destination-description"></h3>
+        <p id="trip-countdown"></p>
+        <p id="trip-length"></p>
+        <p id="destination-temp"></p>
       </div>
       <script>
          // Check that service workers are supported

@@ -14,6 +14,10 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
 })
 
+app.get('/', function (req, res) {
+    res.sendFile('./dist/index.html')
+})
+
 app.get('/trip', (req, res) => {
     let city = req.query.city;
     let getCurrentForecast = req.query.withinWeek == 'true';
