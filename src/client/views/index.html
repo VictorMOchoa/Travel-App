@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Weather Journal</title>
+      <title>Travel App</title>
       <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
    </head>
    <body>
@@ -24,7 +24,7 @@
            <label for="arrival">Enter your return date</label>
            <input type="text" id="return-date" placeholder="mm/dd/yyyy">
         </div>
-        <button id="submit-btn" type = "submit" onclick="Client.handleSubmit(event)"> SUBMIT </button>
+        <button id="submit-btn" type ="submit"> SUBMIT </button>
       </div>
       <div id="results-div">
         <img id="destination-image" src=""></img>
@@ -32,6 +32,7 @@
         <p id="trip-countdown"></p>
         <p id="trip-length"></p>
         <p id="destination-temp"></p>
+        <button id="return-btn"> BOOK ANOTHER TRIP </button>
       </div>
       <script>
          // Check that service workers are supported

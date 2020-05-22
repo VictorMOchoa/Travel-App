@@ -1,4 +1,15 @@
-import { isInputValid, calculateDaysFromNow, calculateTripLength } from './inputUtils.js'
+import { isInputValid, isDateValid, calculateDaysFromNow, calculateTripLength } from './inputUtils.js'
+
+let returnHome = (event) => {
+  // Switch which div is showing
+  document.getElementById('results-div').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  // Clear lingering data
+  document.getElementById('city-name').value = '';
+  document.getElementById('depart-date').value = '';
+  document.getElementById('return-date').value = '';
+  document.getElementById('destination-image').src = '';
+}
 
 let handleSubmit = (event) => {
    // Get the values from the UI
@@ -62,6 +73,7 @@ let handleSubmit = (event) => {
 
 let updateUI = (data) => {
    document.getElementById('app').style.display = 'none';
+   document.getElementById('results-div').style.display = 'block';
    document.getElementById('destination-image').src = data.image;
    document.getElementById('destination-description').innerHTML = `Your trip to ${data.cityName}:`;
    document.getElementById('trip-countdown').innerHTML = `..is in ${data.daysFromNow} day(s)`;
@@ -73,4 +85,4 @@ let updateUI = (data) => {
    }
 }
 
-export { handleSubmit }
+export { handleSubmit, returnHome }

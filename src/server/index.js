@@ -82,6 +82,7 @@ let constructObjectForUI = (imageURL, weatherData) => {
   return obj;
 }
 
+// Endpoint to use should the user destination return no hits
 app.get('/altPhoto', (req, res) => {
     let country = req.query.countryCode;
     getCountryPhoto(country)
@@ -104,3 +105,5 @@ let getCountryPhoto = (country) => {
       return obj;
     });
 }
+
+// module.exports = app;

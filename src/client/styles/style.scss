@@ -7,6 +7,10 @@ html, body {
   text-align: center;
 }
 
+#results-div {
+  display: none;
+}
+
 #airport-img {
   height: 40%;
   width: 40%;
@@ -17,7 +21,7 @@ label {
   margin: 10px;
 }
 
-#submit-btn {
+#submit-btn, #return-btn {
   width: 175px;
   height: 25px;
   color: #4CAF50;
@@ -26,7 +30,7 @@ label {
   transition-duration: 0.4s;
 }
 
-#submit-btn:hover{
+#submit-btn:hover, #return-btn:hover {
   background-color: #4CAF50;
   color: white;
 }

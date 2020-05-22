@@ -1,4 +1,4 @@
-import { isInputValid, calculateTripLength } from '../inputUtils'
+import { isInputValid, isDateValid, calculateTripLength } from '../inputUtils'
 
 test('Testing that isInputValid is a valid function', () => {
     expect(isInputValid).toBeInstanceOf(Function);
@@ -16,8 +16,12 @@ test('Testing that blank (whitespace) value will fail to be a valid input', () =
     expect(isInputValid("    ")).toBeFalsy();
 })
 
-test('Testing for success', () => {
-    expect(isInputValid("11/11/2011")).toBeTruthy();
+test('Testing isDateValid for success', () => {
+    expect(isDateValid("11/11/2011")).toBeTruthy();
+})
+
+test('Testing isDateValid for failure', () => {
+    expect(isDateValid("11/11/11")).toBeFalsy();
 })
 
 test('Testing that calculateTripLength is a valid function', () => {
